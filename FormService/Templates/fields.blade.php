@@ -72,11 +72,13 @@
         @endif   
         
 @if($config->plain != true)
-    </div>
-    <div class="col-sm-8 col-sm-offset-4">
-        <div style="color:red;"> 
-            {{ <?= $config->errorFieldPrefix ?>['<?= $config->errorField ?>'][0] }}</div>
-    
+            <div style="color:red;" ng-if="<?= $config->errorFieldPrefix ?>['<?= $config->errorField ?>'].length > 0"> 
+                <ul>
+                    <li ng-repeat="error in <?= $config->errorFieldPrefix ?>['<?= $config->errorField ?>']">
+                        @{{error}}
+                    </li>
+                </ul>
+            </div>
     </div>
 
   </div>

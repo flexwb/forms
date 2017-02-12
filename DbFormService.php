@@ -29,7 +29,7 @@ class DbFormService extends FormService {
         $form .= $this->start();
         foreach($fields as $field) {
 
-            $config['errorFieldPrefix'] = $tableName.'.errors';
+            $config['errorFieldPrefix'] = 'home.errors';
 
             if(!in_array($field->form_input, $this->inputTypeWithValues)) {
 
