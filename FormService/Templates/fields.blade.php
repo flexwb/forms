@@ -35,10 +35,11 @@
         <div>
             
             
-        
-        <datepicker  date-format='yyyy-MM-dd'>
-            <input ng-model="<?= 'form.'.$config->name?>" type="text"/> {{<?= 'form.'.$config->name ?>  | date:"dd/MMM/yyyy" }}
-          </datepicker>
+        <input ng-flatpickr class="flatpickr" type="text" 
+               ng-model="<?= 'form.'.$config->name ?>" 
+               value="{{<?= 'form.'.$config->name ?>}}"
+               placeholder="Select Date.." />
+    <input ng-model="myDate" />
         </div>
         @endif
         
