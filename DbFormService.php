@@ -22,7 +22,8 @@ class DbFormService extends FormService {
             
         }
 
-        $fields = $q->get();
+        $fields = $q->orderBy('sort_order')->get();
+//        dd($fields);
         if($fields->isEmpty()) {
             $form .= "<p>No fields Defined for table $tableName</p>";
         }
@@ -34,6 +35,7 @@ class DbFormService extends FormService {
             if(!in_array($field->form_input, $this->inputTypeWithValues)) {
 
                 $form .= $this->field($field->form_input, $field->field)
+                                ->label($field->label)
                                 ->r($config);
 
             } else {
@@ -65,6 +67,7 @@ class DbFormService extends FormService {
             die("link table $field->link_table not found");
         }
         return $this->field($field->form_input, $field->field)
+                    ->label($field->label)
                     ->fromDb(
                         $field->link_table, 
                         $field->link_ui_label_field,

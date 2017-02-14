@@ -36,10 +36,9 @@
             
             
         <input ng-flatpickr class="flatpickr" type="text" 
+               xvalue="{{<?= 'form.'.$config->name ?>}}" 
                ng-model="<?= 'form.'.$config->name ?>" 
-               value="{{<?= 'form.'.$config->name ?>}}"
                placeholder="Select Date.." />
-    <input ng-model="myDate" />
         </div>
         @endif
         
