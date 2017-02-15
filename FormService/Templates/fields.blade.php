@@ -33,10 +33,7 @@
         
         @if($config->type == 'datepicker')
         <div>
-            
-            
-        <input ng-flatpickr class="flatpickr" type="text" 
-               xvalue="{{<?= 'form.'.$config->name ?>}}" 
+        <input ng-flatpickr type="text" 
                ng-model="<?= 'form.'.$config->name ?>" 
                placeholder="Select Date.." />
         </div>
