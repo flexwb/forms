@@ -52,7 +52,7 @@
         @endif
 
         @if($config->type == 'file')
-            @include('fileupload')
+            @include('form_views::fileupload')
         @endif
         
         @if($config->type == 'select')

@@ -21,7 +21,8 @@ class FormService {
         'date',
         'datepicker',
         'hidden',
-        'atoll_island'
+        'atoll_island',
+        'file'
     ];
     
     protected $inputTypeWithValues = [
