@@ -15,26 +15,26 @@
       <div class="col-10 {{$config->cssField}}">
 @endif
         @if($config->type == 'texteditor')
-            <div  summernote class="summernote" ng-model="<?= 'form.'.$config->name ?>"></div>
+            <div  summernote class="summernote" ng-model="<?= 'home.form.'.$config->name ?>"></div>
         @endif
         
         @if($config->type == 'textarea')
-            <textarea class="form-control" rows="3" ng-model="<?= 'form.'.$config->name ?>"></textarea>
+            <textarea class="form-control" rows="3" ng-model="<?= 'home.form.'.$config->name ?>"></textarea>
         @endif
         
 
         @if($config->type == 'text' || $config->type == 'number' || $config->type == 'password')
-        <input type="<?= $config->type ?>" class="form-control" ng-model="<?= 'form.'.$config->name ?>">
+        <input type="<?= $config->type ?>" class="form-control" ng-model="<?= 'home.form.'.$config->name ?>">
         @endif
         
          @if($config->type == 'date')
-        <mv-date-field field-value='<?= 'form.'.$config->name ?>'></mv-date-field>
+        <mv-date-field field-value='<?= 'home.form.'.$config->name ?>'></mv-date-field>
          @endif
         
         @if($config->type == 'datepicker')
         <div>
         <input ng-flatpickr type="text" 
-               ng-model="<?= 'form.'.$config->name ?>" 
+               ng-model="<?= 'home.form.'.$config->name ?>" 
                placeholder="Select Date.." />
         </div>
         @endif
@@ -43,7 +43,7 @@
         <div>
             @foreach($config->values as $key => $value)
                 <span style="margin-right: 10px;">
-                 <input type="<?= $config->type ?>" ng-model="<?= 'form.'.$config->name ?>"  
+                 <input type="<?= $config->type ?>" ng-model="<?= 'home.form.'.$config->name ?>"  
                         name="<?= $config->name ?>" value="<?= $key ?>">
                 <?= ucfirst($value) ?></span>
            
@@ -58,7 +58,7 @@
         @if($config->type == 'select')
             <select  
                      class="form-control" 
-                     ng-model="<?= 'form.'.$config->name ?>"
+                     ng-model="<?= 'home.form.'.$config->name ?>"
                      >
             @foreach($config->values as $key => $value)
        

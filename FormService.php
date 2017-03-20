@@ -36,7 +36,7 @@ class FormService {
         'errorFieldPrefix' => "",
         'plain' => false,
         'additionalAttrs' => "",
-        'modelPrefix' => "form"
+        'modelPrefix' => "home.form"
     ];
     
     public function __construct() {
