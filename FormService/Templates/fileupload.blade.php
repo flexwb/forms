@@ -1,6 +1,6 @@
 <div>
-    <div ngf-select="home.uploadFile(file, '<?= 'form.'.$config->name ?>')" 
-         ngf-drop="home.uploadFile(file, '<?= 'form.'.$config->name ?>')"
+    <div ngf-select="home.uploadFile(file, '<?=$config->name ?>')" 
+         ngf-drop="home.uploadFile(file, '<?=$config->name ?>')"
    ng-model="file" 
    ngf-multiple="false"
    ngf-pattern="image/*,application/pdf" 
@@ -13,4 +13,5 @@
             <span ng-show="<?= 'form.'.$config->name ?>" class="" style=""></span>
         </div>
     <input type='hidden' ng-model='<?= 'form.'.$config->name ?>' />
+    {{home.form.<?= $config->name ?>}}
 </div>
