@@ -4,7 +4,7 @@ namespace Modules\Forms;
 
 class DbFormService extends FormService {
 
-    public $excludeFields = []; 
+    public $excludeFields = [];
 
     function exclude($fields) {
         $this->excludeFields = $fields;
@@ -12,14 +12,15 @@ class DbFormService extends FormService {
     }
 
     function formForTable($tableName) {
-        
+
         $form = '<div class="row">';
         $q = \DB::table('eds_fields')->where('table','=', $tableName);
+        $titles = \DB::table('eds_form_extras')->where('table','=', $tableName)->orderBy('sort_order')->get()->keyBy('id');
         if(!empty($this->excludeFields)) {
             foreach($this->excludeFields as $field) {
                 $q = $q->where('field', "!=", $field);
             }
-            
+
         }
 
         $fields = $q->orderBy('sort_order')->get();
@@ -31,6 +32,12 @@ class DbFormService extends FormService {
         foreach($fields as $field) {
 
             $config['errorFieldPrefix'] = 'home.errors';
+            $fieldGrpTitle =  $titles->where('sort_order', '<',$field->sort_order);
+
+            foreach ($fieldGrpTitle as $key => $value) {
+              $form .= $value->display_value;
+              $titles->forget($key);
+            }
 
             if(!in_array($field->form_input, $this->inputTypeWithValues)) {
 
@@ -45,12 +52,12 @@ class DbFormService extends FormService {
             }
 
         }
-        
+
         $form .= $this->end();
         $form .= "</div>";
         return $form;
 
-        
+
 
     }
 
@@ -58,10 +65,10 @@ class DbFormService extends FormService {
 
         if(\Schema::hasTable($field->link_table)) {
             if(!\Schema::hasColumn($field->link_table, $field->link_field)) {
-                die("link table $field->link_table does not have fk column <b>$field->link_field</b>");    
+                die("link table $field->link_table does not have fk column <b>$field->link_field</b>");
             }
             if(!\Schema::hasColumn($field->link_table, $field->link_ui_label_field)) {
-                die("link table $field->link_table does not have display field <b>$field->link_ui_label_field</b>");    
+                die("link table $field->link_table does not have display field <b>$field->link_ui_label_field</b>");
             }
         } else {
             die("link table $field->link_table not found");
@@ -69,40 +76,40 @@ class DbFormService extends FormService {
         return $this->field($field->form_input, $field->field)
                     ->label($field->label)
                     ->fromDb(
-                        $field->link_table, 
+                        $field->link_table,
                         $field->link_ui_label_field,
                         $field->link_field)->r($config);
     }
 
     function field($fieldType, $fieldName) {
-        
-        
-        
+
+
+
         if(isset($this->config['label'])) {
             unset($this->config['label']);
         }
         if(isset($this->config['cssClass'])) {
             unset($this->config['cssClass']);
         }
-        
+
         $this->labelFieldDimension();
-        
+
         if(!in_array($fieldType, array_merge($this->inputTypes, $this->inputTypeWithValues))) {
-            
+
             var_dump($this->inputTypes);
-            
+
             dd("function ".$fieldType." does not exist;");
         }
-        
-        
+
+
         $this->config['type'] = $fieldType;
         $this->config['name'] = $fieldName;
-        
+
         if(!in_array($fieldType, $this->inputTypeWithValues)) {
-            
+
             $this->config['values'] = ["val1", "val2"];
         }
-        
+
         return $this;
     }
 
